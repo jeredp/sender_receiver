@@ -25,15 +25,17 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile 'org.mongodb:mongodb-driver:3.5.0'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
     compile 'org.springframework.boot:spring-boot-starter-activemq'
+    compile 'com.google.guava:guava:22.0'
+    compile 'com.google.code.gson:gson:2.8.1'
     // tag::actuator[]
-    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
     // end::actuator[]
     // tag::tests[]
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.apache.activemq.tooling:activemq-junit:5.14.5")
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.apache.activemq.tooling:activemq-junit:5.14.5'
     // end::tests[]
 }
 
