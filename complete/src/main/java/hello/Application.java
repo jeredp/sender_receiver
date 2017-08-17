@@ -2,6 +2,7 @@ package hello;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import hello.messaging.Sender;
 import hello.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -40,8 +41,8 @@ public class Application {
     }
 
     @Bean
-    public UserService userService(MongoDatabase database) {
-        return new UserService(database);
+    public UserService userService(MongoDatabase database, Sender sender) {
+        return new UserService(database, sender);
     }
 
 }
