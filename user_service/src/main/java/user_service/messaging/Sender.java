@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
+import user_service.messaging.events.Event;
+import user_service.messaging.events.UserCreatedEvent;
 import user_service.models.User;
 
 public class Sender {
@@ -19,9 +21,10 @@ public class Sender {
         this.jmsTemplate = jmsTemplate;
     }
 
-    public void send(String destination, User user) {
+    public void send(String destination, Event event) {
         try {
-            jmsTemplate.convertAndSend(destination, new ObjectMapper().writeValueAsString(user));
+            String message = new ObjectMapper().writeValueAsString(event);
+            jmsTemplate.convertAndSend(destination, message);
         } catch (JsonProcessingException e) {
             LOGGER.error("could not send message", e);
             e.printStackTrace();

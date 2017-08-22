@@ -30,6 +30,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-activemq'
     compile 'com.google.guava:guava:22.0'
     compile 'com.google.code.gson:gson:2.8.1'
+    compile 'org.springframework.data:spring-data-redis:1.7.11.RELEASE'
     // tag::actuator[]
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     // end::actuator[]

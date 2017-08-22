@@ -1,0 +1,9 @@
+activemq:
+  broker-url: tcp://localhost:61616
+
+queue:
+  users: users.q
+
+spring:
+  activemq:
+    in-memory: false

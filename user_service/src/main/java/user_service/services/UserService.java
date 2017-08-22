@@ -5,6 +5,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import user_service.messaging.Sender;
+import user_service.messaging.events.UserCreatedEvent;
 import user_service.models.User;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,11 @@ public class UserService {
 
     public User createUser(User user) {
         User saved = this.userRepository.save(user);
-        this.sender.send(usersQueue, saved);
+        createUserEvent(saved);
         return saved;
+    }
+
+    private void createUserEvent(User user) {
+        this.sender.send(usersQueue, new UserCreatedEvent(user));
     }
 }

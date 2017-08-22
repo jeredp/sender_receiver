@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+import user_service.messaging.events.UserCreatedEvent;
 import user_service.models.User;
 
 import java.util.concurrent.TimeUnit;
@@ -34,9 +35,9 @@ public class SenderTest {
 
         sender = new Sender(jmsTemplate);
         User user = new User("user", "pass");
-        sender.send(QUEUE, user);
+        sender.send(QUEUE, new UserCreatedEvent(user));
 
-        verify(jmsTemplate).convertAndSend(QUEUE, "{\"id\":null,\"email\":\"user\",\"password\":\"pass\"}");
+        verify(jmsTemplate).convertAndSend(QUEUE, "{\"type\":\"UserCreatedEvent\",\"value\":{\"email\":\"user\"}}");
 
     }
 }
